@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Doctor Details</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background-color: #ffffff;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+    .logo {
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: #333;
+    }
+    nav a {
+      margin-left: 2rem;
+      color: #333;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .hero {
+      background-image: url('bcard.jpg'); /* Add your image URL here */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: white;
+      padding: 4rem 2rem;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      margin-top: 4rem; /* Adjusted for fixed header */
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5); /* Black opacity for hero */
+      z-index: -1;
+    }
+    .hero h1 {
+      font-size: 3.2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    .hero p {
+      font-size: 1.3rem;
+      font-weight: 500;
+      margin-bottom: 2rem;
+    }
+    .hero button {
+      display: inline-block;
+      color: white;
+      background-color: #102770;
+      padding: 0.8rem 1.5rem;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+    }
+    .hero button:hover {
+      background-color: #0b1a3e;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 5rem auto; /* Increased margin for better spacing */
+      padding: 0 2rem;
+    }
+    .card {
+      background-color: #ffffff;
+      border-radius: 10px;
+      padding: 2rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+      text-align: center;
+    }
+    .card:hover {
+      transform: translateY(-10px);
+    }
+    .card img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      margin-bottom: 1.5rem;
+    }
+    .card h3 {
+      font-size: 1.6rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #333;
+    }
+    .card p {
+      font-size: 1.1rem;
+      color: #666;
+      font-weight: 500;
+    }
+    footer {
+      background-color: #333;
+      color: white;
+      padding: 2rem 0;
+      text-align: center;
+      margin-top: 3rem;
+    }
+    footer p {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+    .btn {
+      color: #102770;
+      background-color: bisque;
+      padding: 0.8rem 1.5rem;
+      border-radius: 5px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+    }
+    .btn:hover {
+      color: bisque;
+      background-color: #102770;
+    }
+    
+    .form-container {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 8px;
+      padding: 2rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      max-width: 800px;
+      margin: 2rem auto;
+    }
+    .form-container h2 {
+      margin-bottom: 1.5rem;
+    }
+    .form-container label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+    .form-container input, .form-container textarea {
+      width: 100%;
+      padding: 0.8rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    .form-container button {
+      background-color: #102770;
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 5px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .form-container button:hover {
+      background-color: #0b1a3e;
+    }
+    .message {
+      background-color: #d4edda;
+      color: #155724;
+      padding: 1rem;
+      border-radius: 4px;
+      margin: 2rem auto;
+      max-width: 800px;
+      text-align: center;
+    }
+    .message.error {
+      background-color: #f8d7da;
+      color: #721c24;
+    }
+    .image-preview {
+      margin-bottom: 1rem;
+      height: 150px; /* Set a fixed height */
+      overflow: hidden; /* Hide overflow to maintain aspect ratio */
+      display: flex;
+      justify-content: center; /* Center image horizontally */
+      align-items: center; /* Center image vertically */
+    }
+    
+    .image-preview img {
+      max-width: 100%; /* Ensure image doesn't exceed the container's width */
+      height: auto; /* Maintain aspect ratio */
+      border-radius: 10px; /* Match border radius */
+    }
+    
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">الرقيب</div>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="#">Services</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
+  
+  <div class="hero">
+    <h1 id="welcome-text">Welcome to Your Dashboard</h1>
+    <p><i>"Live life fully, with purpose and will."</i></p>
+    <button class="btn"><b>Visit your appointments</b></button>
+  </div>
+
+  <div class="container">
+    <div id="details-message" class="message" style="display: none;"></div>
+    
+    <div id="doctor-details-form" class="form-container" style="display: none;">
+      <h2>Update Your Details</h2>
+      <form id="detailsForm" onsubmit="submitDoctorDetails(event)" enctype="multipart/form-data">
+        <label for="image">Profile Image:</label>
+        <input type="file" id="image" name="image" accept="image/*" onchange="previewImage(event)">
+        <div id="image-preview" class="image-preview"></div>
+
+        <input type="hidden" id="name" name="name" value="">
+
+        <label for="serviceFee">Service Fee:</label>
+        <input type="number" id="serviceFee" name="serviceFee" required>
+        
+        <label for="availability">Availability:</label>
+        <input type="text" id="availability" name="availability" required>
+        
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" rows="4" required></textarea>
+        
+        <label for="contactDetails">Contact Details:</label>
+        <input type="text" id="contactDetails" name="contactDetails" required>
+        
+        <label for="organization">Organization:</label>
+        <input type="text" id="organization" name="organization" required>
+        
+        <label for="experience">Years of Experience:</label>
+        <input type="number" id="experience" name="experience" required>
+        
+        <input type="hidden" id="email" name="email" value="">
+        
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+  
+  <footer>
+    <p>&copy; 2024 Your Company</p>
+    <p>All Rights Reserved</p>
+  </footer>
+  
+  <script>
+    function getQueryParams() {
+      const params = new URLSearchParams(window.location.search);
+      return {
+        name: params.get('name'),
+        email: params.get('email')
+      };
+    }
+
+    function updateWelcomeText() {
+      const { name, email } = getQueryParams();
+      if (name) {
+        document.getElementById('welcome-text').textContent = `Welcome back, Doc ${name}!`;
+        document.getElementById('email').value = email; 
+        document.getElementById('name').value = name; 
+        checkDoctorDetails(email);
+      }
+    }
+
+    function checkDoctorDetails(email) {
+      fetch(`/check-doctor-details?email=${email}`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`Error fetching details: ${response.status} ${response.statusText}`);
+          }
+          return response.json();
+        })
+        .then(data => {
+          if (data.exists) {
+            displayDoctorDetails(data.details);
+          } else {
+            document.getElementById('doctor-details-form').style.display = 'block';
+            showMessage('No details found. Please fill out the form.', 'info');
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching details:', error);
+          showMessage('An error occurred while fetching details. Please try again later.', 'error');
+        });
+    }
+
+    function displayDoctorDetails(details) {
+      const detailsMessage = document.getElementById('details-message');
+      detailsMessage.innerHTML = `
+        <h3>Doctor Details</h3>
+        <img src="${details.image}" alt="Profile Image" style="width: 50%;height: 10%;border-radius: 8px;margin-bottom: 1rem;"/>
+        <p><b>Name:</b> ${details.name}</p>
+        <p><b>Service Fee:</b> ${details.serviceFee}</p>
+        <p><b>Availability:</b> ${details.availability}</p>
+        <p><b>Description:</b> ${details.description}</p>
+        <p><b>Contact Details:</b> ${details.contactDetails}</p>
+        <p><b>Organization:</b> ${details.organization}</p>
+        <p><b>Experience:</b> ${details.experience} years</p>
+      `;
+      detailsMessage.style.display = 'block';
+      document.getElementById('doctor-details-form').style.display = 'none';
+    }
+
+    function submitDoctorDetails(event) {
+      event.preventDefault();
+      const formData = new FormData(document.getElementById('detailsForm'));
+
+      fetch('/submit-doctor-details', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          showMessage('Details submitted successfully!', 'success');
+        } else {
+          showMessage('Failed to submit details. Please try again.', 'error');
+        }
+      })
+      .catch(error => {
+        console.error('Error submitting details:', error);
+        showMessage('Details submitted successfully!', 'success');
+      });
+    }
+
+    function previewImage(event) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const imgPreview = document.getElementById('image-preview');
+        imgPreview.innerHTML = `<img src="${e.target.result}" alt="Profile Image Preview" />`;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function showMessage(message, type) {
+      const messageBox = document.getElementById('details-message');
+      messageBox.textContent = message;
+      messageBox.className = `message ${type}`;
+      messageBox.style.display = 'block';
+    }
+
+    window.onload = updateWelcomeText;
+  </script>
+</body>
+</html>
